@@ -14,8 +14,11 @@
 			<h1>All Company List</h1>
 			
 		</div>
-		<a class="btn btn-primary mx-3" th:href="@{/create}">Add New Company</a>
-		<a class="btn btn-secondary" th:href="@{/listAll}">list  Employee</a>
+		<a class="btn btn-primary mx-3" th:href="@{/company/create}">Add New Company</a>
+		<a class="btn btn-secondary" th:href="@{/employee/listAll}">list  Employee</a>
+		
+ 			
+ 		
 			<table class="table table-striped table-borderd mt-3">
 				<thead class="table-dark">
 					<tr>
@@ -32,11 +35,13 @@
 				<td th:text="${list.companyName}"></td>
 				<td th:text="${list.year}"></td>
 				<td>
-					<a class="btn btn-warning" th:href="@{/edit/{id}(id=${list.id})}">Edit</a>
-					<a class="btn btn-danger" th:href="@{/delete/{id}(id=${list.id})}">Delete</a>
+					<a class="btn btn-warning" th:href="@{/company/edit/{id}(id=${list.id})}">Edit</a>
+					<a class="btn btn-danger" th:href="@{/company/delete/{id}(id=${list.id})}">Delete</a>
 				</td>
 			</tr>
 		</table>
+		
+		
 		
 	</div>
 	

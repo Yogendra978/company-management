@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.backend.entity.Company;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 	
 	@Autowired
@@ -32,15 +34,15 @@ public class EmployeeController {
 	private EmployeeRepository employeeRepository;
 
 	
-	//localhost:3030/createEmp
-	@GetMapping("/createEmp")
+	//localhost:3030/employee/createEmp
+	@GetMapping("/create")
 	public String createUser() {
 		return "createEmployee";
 	}
 	
 	
-	//localhost:3030/saveall
-	@PostMapping("/saveall")
+	//localhost:3030/employee/save
+	@PostMapping("/save")
 	public String saveUser(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
 			@RequestParam("email") String email,@RequestParam("company") int company,Model model) {
 			Company Id = companyRepository.findById(company);
@@ -51,7 +53,7 @@ public class EmployeeController {
 		employee2.setEmail(email);
 		employee2.setCompany(Id);
 		employeeRepository.save(employee2);
-		model.addAttribute("msg", "Record is saved!");
+		model.addAttribute("msg", "Employee has been Created!");
 		return "createEmployee";
 		}else {
 			
@@ -61,7 +63,7 @@ public class EmployeeController {
 		
 	}
 	
-	//localhost:3030/listAll
+	//localhost:3030/employee/listAll
 	@GetMapping("/listAll")
 	public String listAll(Model model) {
 		List<Employee> listAll = employeeRepository.findAll();
@@ -80,7 +82,7 @@ public class EmployeeController {
 	}
 	
 	
-	//localhost:3030/editEmp/id
+	//localhost:3030/employee/editEmp/id
 	@PostMapping("/editEmp/{id}")
 	public String updatedEmployee(@PathVariable int id,@ModelAttribute("emp") Employee employee) {
 		
@@ -95,13 +97,13 @@ public class EmployeeController {
 		//uptated user
 		Employee updateEmp = employeeRepository.save(newEmp);
 		
-		return "redirect:/listAll";
+		return "redirect:/employee/listAll";
 	}
 	
-	//localhost:3030/deleteEmp/id
+	//localhost:3030/employee/deleteEmp/id
 	@GetMapping("/deleteEmp/{id}")
 	public String deleteUser(@PathVariable int id) {
 		employeeRepository.deleteById(id);
-		return "redirect:/listAll";
+		return "redirect:/employee/listAll";
 	}
 }

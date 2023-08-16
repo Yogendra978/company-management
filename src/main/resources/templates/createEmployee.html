@@ -10,14 +10,14 @@
  
  <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" th:href="@{/create}">Employee Management System</a>
+    <a class="navbar-brand" th:href="@{/employee/create}">Employee Management System</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/createEmp}">Home</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/employee/create}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:href="@{listAll}">List</a>
@@ -31,20 +31,23 @@
  
 
  <div class="container">
- 		<h1 th:text="${msg}"></h1>
+ 		<span th:if="${msg}">
+ 			<p th:text="${msg}" class="alert alert-success"></p>
+ 		</span>
+ 		
  	<div class="row">
  		 <div class="col-1">
- 		 	<a class="btn btn-primary mt-2" th:href="@{/listAll}">List Employee</a>
+ 		 	<a class="btn btn-primary mt-2" th:href="@{/employee/listAll}">List Employee</a>
  		 </div>
  		 <div class="col-1">
- 		 	<a class="btn btn-secondary mt-2" th:href="@{/create}">Create Company </a>
+ 		 	<a class="btn btn-secondary mt-2" th:href="@{/company/create}">Create Company </a>
  		 </div>
  		<div class="col-lg-4 col-md-6 col-sm-6 container justyfy-content-center card mt-3">
  			<h1 class="text-center ">Create New Employee</h1>
  		 	
  		 
  			<div class="card-body"> 
- 				 <form th:action="@{/saveall}"  method="POST">
+ 				 <form th:action="@{/employee/save}"  method="POST">
  				 	<div class="form-group mt-2">
  				 		<label>First Name :</label>
  				 		<input type="text"  name="firstName" class="form-control " placeholder="Enter Your FirstName" required="required"/>
